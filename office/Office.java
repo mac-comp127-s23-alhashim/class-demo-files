@@ -9,7 +9,7 @@ public class Office {
         this.name = name;
     }
 
-    public void setSize(double newSize) {
+    protected void setSize(double newSize) {
         this.size = newSize;
     }
 
