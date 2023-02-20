@@ -1,6 +1,4 @@
-package office;
-
-import furniture.Furniture;
+package furniture;
 
 public class FurnintureTest {
     public static void main(String[] args) {

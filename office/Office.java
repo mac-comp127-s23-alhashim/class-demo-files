@@ -1,6 +1,6 @@
 package office;
 
-public class Office {
+public class Office extends Object {
     protected double size;
     private String name;
 
@@ -9,11 +9,15 @@ public class Office {
         this.name = name;
     }
 
-    protected void setSize(double newSize) {
+    protected final void setSize(double newSize) {
         this.size = newSize;
     }
 
     public double getSize() {
         return this.size;
+    }
+
+    public abstract void setName(String newName) {
+        this.name = newName;
     }
 }
