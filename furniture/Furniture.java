@@ -1,7 +1,7 @@
 package furniture;
 
 public class Furniture {
-    private double price;
+    public double price;
     private String color;
 
     public Furniture(double price, String color) { 

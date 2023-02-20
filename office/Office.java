@@ -1,7 +1,7 @@
 package office;
 
 public class Office {
-    private double size;
+    protected double size;
     private String name;
 
     public Office(double size, String name) {
