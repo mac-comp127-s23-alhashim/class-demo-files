@@ -1,7 +1,5 @@
 package polymorphism;
 
-public class A {
-    public void action() {
-        System.out.println("Hello from A");
-    }
+public interface A {
+    public void action();
 }
