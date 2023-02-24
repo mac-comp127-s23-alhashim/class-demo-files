@@ -1,6 +1,6 @@
 package furniture;
 
-public class Furniture {
+public abstract class Furniture extends Object {
     public double price;
     private String color;
 
@@ -9,16 +9,18 @@ public class Furniture {
         this.color = color;
     }
 
-    public double getPrice() {
-        return this.price;
-    }
+    public abstract double getPrice();
 
-    public void setPrice(double newPrice) {
+    public final void setPrice(double newPrice) {
         if(newPrice<0) {
             this.price = -1*newPrice;
         }
         else {
             this.price = newPrice;
         }
+    }
+
+    public void setColor(String newColor) {
+        this.color = newColor;
     }
 }
