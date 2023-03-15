@@ -138,7 +138,7 @@ class MyC5 {
 
 class TesterLE11 {
     public static void main(String[] args) {
-        MyC5 myC = new MyC5();
-        myC.myCMethod(10, (t, u) -> t*u);
+        MyC5 myC5 = new MyC5();
+        myC5.myCMethod(10, (t, u) -> t*u);
     }
 }
