@@ -23,8 +23,20 @@ public class LambdaTest_Sort {
         System.out.println(Arrays.toString(planets));
 
         System.out.println();
-        System.out.println("Sorted by length");
+        System.out.println("Sorted by length using lembda experssion");
         Arrays.sort(planets, (first, second) -> first.length() - second.length());
         System.out.println(Arrays.toString(planets));
+        
+        System.out.println();
+        System.out.println("Sorted by length using normal method");
+        Arrays.sort(planets, new ByLengthComparator());
+        System.out.println(Arrays.toString(planets));
+    }
+}
+class ByLengthComparator implements Comparator<String> {
+
+    @Override
+    public int compare(String first, String second) {
+        return first.length() - second.length();
     }
 }
