@@ -117,14 +117,15 @@ class Test {
             redBallTop10Ids.add(ball.getId());
         }
         long estimatedTime = System.currentTimeMillis() - startTime;
+        Prep2.printBallsIds(redBallTop10Ids, "Traditional");
         System.out.println("Non-Stream: " + estimatedTime);
 
 
         // Stream Approach =========================================
         startTime = System.currentTimeMillis();
         List<String> redBallIds_stream = 
-            // balls.parallelStream()
-            balls.stream()
+            balls.parallelStream()
+            // balls.stream()
             .filter(b -> b.getColor() == Color.RED)
             .sorted(comparing(Ball::getSize))
             .limit(10)
@@ -132,5 +133,6 @@ class Test {
             .collect(toList());
         estimatedTime = System.currentTimeMillis() - startTime;
         System.out.println("Stream: " + estimatedTime);
+        Prep2.printBallsIds(redBallIds_stream, "Stream");
     }
 }
