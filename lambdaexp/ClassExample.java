@@ -4,33 +4,53 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.IntConsumer;
 
+
+/*
+ * My Interface
+ */
+@FunctionalInterface
 interface MyI {
     void myIMethod(int i);
 }
 
+
+/*
+ * My Class
+ */
 class MyC {
     void myCMethod(int i, MyI mi) {
         mi.myIMethod(i);
     }
 }
 
-class MyIC implements MyI {
-    @Override
-    public void myIMethod(int n) {
-        System.out.println(n);
-    }
-}
 
-class Tester {
+/*
+* My Class Tester using inner class approach
+*/
+class MyCTesterInnerClass {
     public static void main(String[] args) {
         MyI myI = new MyIC();
-
+        
         MyC myC = new MyC();
         myC.myCMethod(10, myI);
     }
+    
+    /*
+     * My Interface Class (private inner class) implementing My Interface
+     */
+    private static class MyIC implements MyI {
+        @Override
+        public void myIMethod(int n) {
+            System.out.println(n);
+        }
+    }
 }
 
-class TesterLE {
+
+/*
+ * My Class Testers using lambda expression apporach
+ */
+class MyCTesterLE1 {
     public static void main(String[] args) {
         MyC myC = new MyC();
         myC.myCMethod(10, (int n) -> { 
@@ -39,7 +59,7 @@ class TesterLE {
     }
 }
 
-class TesterLE2 {
+class MyCTesterLE2 {
     public static void main(String[] args) {
         MyC myC = new MyC();
         myC.myCMethod(10, (n) -> { 
@@ -48,7 +68,7 @@ class TesterLE2 {
     }
 }
 
-class TesterLE3 {
+class MyCTesterLE3 {
     public static void main(String[] args) {
         MyC myC = new MyC();
         myC.myCMethod(10, n -> { 
@@ -57,7 +77,7 @@ class TesterLE3 {
     }
 }
 
-class TesterLE4 {
+class MyCTesterLE4 {
     public static void main(String[] args) {
         MyC myC = new MyC();
         myC.myCMethod(10, n -> 
@@ -66,22 +86,21 @@ class TesterLE4 {
     }
 }
 
-class TesterLE5 {
+class MyCTesterLE5 {
     public static void main(String[] args) {
         MyC myC = new MyC();
         myC.myCMethod(10, n -> System.out.println(n));
     }
 }
 
-class TesterLE6 {
+class MyCTesterLE6 {
     public static void main(String[] args) {
         MyC myC = new MyC();
         myC.myCMethod(10, System.out::println);
     }
 }
 
-
-class TesterLE7 {
+class MyCTesterLE7 {
     public static void main(String[] args) {
         MyC myC = new MyC();
         MyI myI = n -> System.out.println(n);

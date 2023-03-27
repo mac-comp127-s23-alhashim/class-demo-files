@@ -3,6 +3,9 @@ package stream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import stream.Dish.Type;
+
 import java.util.Comparator;
 
 import static java.util.Comparator.comparing;
@@ -14,12 +17,14 @@ import static java.util.stream.Collectors.toList;
  */
 
  class Dish {
-    private String name;
-    private int calories;
+    private final String name;
+    private final int calories;
+    private final Type type;
 
-    public Dish(String name, int calories) {
+    public Dish(String name, int calories, Type type) {
         this.name = name;
         this.calories = calories;
+        this.type = type;
     }
 
     int getCalories() {
@@ -30,19 +35,25 @@ import static java.util.stream.Collectors.toList;
         return name;
     }
 
+    public Type getType() {
+        return type;
+    }
+
     @Override
     public String toString() {
-        return getName() + ":" + getCalories();
+        return getType() + ":" + getName() + ":" + getCalories();
     }
+
+    public enum Type {MEAT, FISH, OTHER}
 }
 
 class Prep {
     public static List<Dish> getMenu() {
         List<Dish> menu = new ArrayList<>();
-        menu.add(new Dish("A", 500));
-        menu.add(new Dish("B", 100));
-        menu.add(new Dish("C", 50));
-        menu.add(new Dish("D", 500));
+        menu.add(new Dish("A", 500, Type.FISH));
+        menu.add(new Dish("B", 100, Type.MEAT));
+        menu.add(new Dish("C", 50, Type.OTHER));
+        menu.add(new Dish("D", 500, Type.FISH));
         return menu;
     }
 }
@@ -94,5 +105,67 @@ class StreamTest_Stream {
         .collect(toList());
         
         System.out.println("Sorted Low Cal Names: " + lowCaloriesDishesName.toString());
+    }
+}
+
+
+class StreamTest_StreamParallel {
+    public static void main(String[] args) {
+        List<Dish> menu = Prep.getMenu();
+        System.out.println("Full Menu: " + menu.toString());
+        
+        List<String> lowCaloriesDishesName = 
+        menu.parallelStream() // this waht makes it parallel
+        .filter(d -> d.getCalories() < 400)
+        .sorted(comparing(Dish::getCalories))
+        .map(Dish::getName)
+        .collect(toList());
+        
+        System.out.println("Sorted Low Cal Names: " + lowCaloriesDishesName.toString());
+    }
+}
+
+
+/*
+ * Testing the order in which stream execute the intermediate operations
+ * TRY: commenting some of the intermediate operations such as sort and notice
+ *      the order of operations--the Stream library is performing some optimizations
+ */
+class StreamTest_Stream2 {
+    public static void main(String[] args) {
+        List<Dish> menu = Prep.getMenu();
+        System.out.println("Full Menu: " + menu.toString());
+        
+        List<String> lowCaloriesDishesName = 
+        menu.stream()
+        .filter(d -> {
+            System.out.println("F::" + d);
+            return d.getCalories() < 400;})
+        // .sorted(comparing(d -> {
+            //     System.out.println("S::" + d);
+        //     return d.getCalories();}))
+        .map(d -> {
+            System.out.println("M::" + d);
+            return d.getName();})
+        .limit(3)
+        .collect(toList());
+        
+        System.out.println("Sorted Low Cal Names: " + lowCaloriesDishesName.toString());
+    }
+}
+
+/*
+ * Using the termianl operation forEach to print the results directly
+ */
+class StreamTest_Stream3 {
+    public static void main(String[] args) {
+        List<Dish> menu = Prep.getMenu();
+        System.out.println("Full Menu: " + menu.toString());
+        
+        menu.stream()
+        .filter(d -> d.getCalories() < 400)
+        .sorted(comparing(Dish::getCalories))
+        .map(Dish::getName)
+        .forEach(System.out::println);        
     }
 }
