@@ -66,7 +66,6 @@ class Prep2 {
     }
 
     public static void printBalls(List<Ball> list, String msg) {
-        System.out.println();
         System.out.println("===== " + msg + " (" + list.size() + ") ===================================");
         for(Ball ball : list) {
             System.out.println(ball);
@@ -74,7 +73,6 @@ class Prep2 {
     }
 
     public static void printBallsIds(List<String> list, String msg) {
-        System.out.println();
         System.out.println("===== " + msg + " (" + list.size() + ") ===================================");
         for(String ball : list) {
             System.out.println(ball);
@@ -86,7 +84,7 @@ class Prep2 {
 // we want to get the largest 10 red balls
 class Test {
     public static void main(String[] args) {
-        List<Ball> balls = Prep2.generateRandomeBalls(1_000_000_0, 14);
+        List<Ball> balls = Prep2.generateRandomeBalls(10_000_000, 14);
 
         // Non-stream approach =====================================
         long startTime = System.currentTimeMillis();
@@ -132,7 +130,7 @@ class Test {
             .map(Ball::getId)
             .collect(toList());
         estimatedTime = System.currentTimeMillis() - startTime;
-        System.out.println("Stream: " + estimatedTime);
         Prep2.printBallsIds(redBallIds_stream, "Stream");
+        System.out.println("Stream: " + estimatedTime);
     }
 }
