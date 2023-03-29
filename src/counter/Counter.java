@@ -12,6 +12,12 @@ class counter {
     private static GraphicsText counterHolder;
     public static void main(String[] args) {
         canvas = new CanvasWindow("Counter", 100, 100);
+        
+        // the closure passed to animate will be executed forever directly when the main method finishes
+        canvas.animate(e -> {
+            counterHolder.setText(""+(Integer.parseInt(counterHolder.getText())+1));
+            counterHolder.setCenter(canvas.getWidth()/2, canvas.getHeight()/2);
+        });
        
         counterHolder = new GraphicsText();
         counterHolder.setFontSize(20);
@@ -27,11 +33,7 @@ class counter {
         setTextCenterDrawPause("set");
         setTextCenterDrawPause("go");
         setTextCenterDrawPause("0");
-
-        canvas.animate(e -> {
-            counterHolder.setText(""+(Integer.parseInt(counterHolder.getText())+1));
-            counterHolder.setCenter(canvas.getWidth()/2, canvas.getHeight()/2);
-        });
+        
     }
 
     private static void setTextCenterDrawPause(String text) {
