@@ -9,9 +9,12 @@ import edu.macalester.graphics.GraphicsText;
 class counter {
     private static int INTO_PAUSE_AMOUNT_MS = 500;
     private static CanvasWindow canvas;
+    private static int CANVAS_SIZE = 500;
+    
     private static GraphicsText counterHolder;
+    private static int FONT_SIZE = 100;
     public static void main(String[] args) {
-        canvas = new CanvasWindow("Counter", 100, 100);
+        canvas = new CanvasWindow("Counter", CANVAS_SIZE, CANVAS_SIZE);
         
         // the closure passed to animate will be executed forever directly when the main method finishes
         canvas.animate(e -> {
@@ -20,7 +23,7 @@ class counter {
         });
        
         counterHolder = new GraphicsText();
-        counterHolder.setFontSize(20);
+        counterHolder.setFontSize(FONT_SIZE);
         canvas.add(counterHolder);
 
         setTextCenterDrawPause("animate");
