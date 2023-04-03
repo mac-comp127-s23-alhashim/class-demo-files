@@ -11,6 +11,5 @@ public class Arrays {
         s[2] = "CC";
 
         String[] s2 = {new String(), new String(), new String()};
-        
     }
 }
