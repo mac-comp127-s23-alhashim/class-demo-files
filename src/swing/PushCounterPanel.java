@@ -1,4 +1,4 @@
-package src.gui;
+package swing;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;

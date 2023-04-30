@@ -1,4 +1,4 @@
-package moving;
+package kiltgraphics.bounce;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;

@@ -1,4 +1,4 @@
-package counter;
+package kiltgraphics.animate;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsText;
