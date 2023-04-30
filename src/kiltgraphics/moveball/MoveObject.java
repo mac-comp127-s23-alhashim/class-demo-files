@@ -4,7 +4,7 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.events.Key;
 
-public class MoveBallKeyboard {
+public class MoveObject {
     private static int deltaX = 10;
     private static int deltaY = 10;
     private static int directionX;
@@ -12,7 +12,6 @@ public class MoveBallKeyboard {
 
     public static void main(String[] args) {
         CanvasWindow canvas = new CanvasWindow("Move Ball using Keyboard", 500,500);
-        // Ellipse obj = new Ellipse(0, 0, 5, 5);
         Rectangle obj = new Rectangle(0, 0, 10, 5);
         obj.setFilled(true);
         canvas.add(obj, canvas.getWidth()/2, canvas.getHeight()/2);
